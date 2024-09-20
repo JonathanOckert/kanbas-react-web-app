@@ -8,6 +8,7 @@ export default function Labs() {
     return(
         <div id="wd-labs">
             <h1>Jonathan Ockert</h1>
+            <h3>CS5610 Sec 03</h3>
             <TOC />
             <Routes>
                 <Route path="Lab1" element={<Lab1 />} />
