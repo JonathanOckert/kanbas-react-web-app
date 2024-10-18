@@ -1,6 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useParams, useNavigate } from "react-router-dom";
+import * as db from "../../Database";
 
 export default function AssignmentEditor() {
+    const cid = useParams();
+    const aid = useParams();
+    const assignments = db.assignments;
+    const navigate = useNavigate();
     return (
         <div id="wd-assignments-editor">
             <label htmlFor="wd-name"><b>Assignment Name</b></label> <br /><br />
@@ -149,11 +154,12 @@ export default function AssignmentEditor() {
                     <td></td>
                     <td></td>
                     <td align="right">
-                        <button className="btn btn-light rounded-1 border-gray">
+                        {/*https://reactrouter.com/en/main/hooks/use-navigate*/}
+                        <button onClick={() => navigate(-1)} className="btn btn-light rounded-1 border-gray">
                             Cancel
                         </button> 
                         &nbsp;
-                        <button className="btn btn-danger rounded-1">Save</button>
+                        <button onClick={() => navigate(-1)} className="btn btn-danger rounded-1">Save</button>
                     </td>
                 </tr>
             </table>

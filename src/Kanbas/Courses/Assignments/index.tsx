@@ -3,8 +3,13 @@ import { FaM, FaMagnifyingGlass } from "react-icons/fa6";
 import ModuleControlButtons from "../Modules/ModuleControlButtons";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import LessonControlButtons from "../Modules/LessonControlButtons";
+import * as db from "../../Database";
+import { useParams } from "react-router-dom";
 
 export default function Assignments() {
+    const { cid } = useParams();
+    const assignments = db.assignments;
+
     return (
         <div id="wd-assignments">
             <div id="wd-search-assignment">
@@ -12,34 +17,13 @@ export default function Assignments() {
                     <FaMagnifyingGlass />&nbsp;&nbsp;&nbsp;<span>Search...</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
-                {/*<FaMagnifyingGlass />
-                <input id="wd-search-assignment" className="btn btn-light" 
-    placeholder="Search..." />*/}
-                
-            
+                   
             <button id="wd-add-assignment" className="btn btn-danger float-end">
                 + Assignment
             </button>
             <button id="wd-add-assignment-group" className="btn btn-light float-end">
                 + Group
             </button>
-
-
-
-            {/*<ul id="wd-modules" className="list-group rounded-0">
-                <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
-                    <div className="wd-title p-3 ps-2 bg-secondary"> 
-                        <BsGripVertical />
-                        Week 1 
-                        <ModuleControlButtons />
-                    </div>
-                    <ul className="wd-lessons list-group rounded-0">
-                        <li className="wd-lesson list-group-item p-3 ps-1">
-                            <BsGripVertical />    
-                            LEARNING OBJECTIVES 
-                            <LessonControlButtons />
-    </li> */}
-
 
             </div><br />
             <li id="wd-assignments-list" className="wd-module list-group-item p-0
@@ -50,6 +34,36 @@ export default function Assignments() {
                             40% of Total
                             <ModuleControlButtons />
                         </div>
+                        <ul id="wd-assignments" className="list-group rounded-0">
+                            {assignments
+                                .filter((assignment: any) => assignment.course === cid)
+                                .map((assignment: any) => (
+                                    <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-grey">
+                                        <div className="row g-4">
+                                            <div className="col col-2">
+                                                <AssignmentControlButtons />
+                                            </div>
+                                            <div className="col col-8">
+                                                <a className="wd-assignment-link text-black text-decoration-none" 
+                                                    href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                                                    <b>{assignment.title}</b>
+                                                </a>
+                                                <br />
+                                                <span className="text-danger">{assignment.modules}</span> | <b>Not available until </b> 
+                                                {assignment.availability} | <b>Due</b> {assignment.due_date} | {assignment.points} pts
+                                            </div>
+                                            <div className="col col-2">
+                                                <LessonControlButtons />
+                                            </div>
+                                        </div>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                                        
+            </li>
+
+                        {/*
                         <ul className="wd-assignments list-group rounded-0">
                             <li className="wd-assignment list-group-item p-3 ps-1">
                                 <div id="wd-assignment-info" className="row">
@@ -103,8 +117,7 @@ export default function Assignments() {
                                     </div>
                                 </div>                  
                             </li>
-                        </ul>
-            </li>
+</ul> */}
         </div>
     );
 }
