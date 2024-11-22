@@ -10,6 +10,15 @@ import PassingDataOnEvent from "./PassingDataOnEvent";
 import PassingFunctions from "./PassingFunctions";
 import StringStateVariables from "./StringStateVariables";
 import ReduxExamples from "./ReduxExamples";
+import Fds from "./Fds";
+import Abc from "./Abc";
+import Abcsecond from "./Abcsecond";
+import Def from "./Def";
+import Abcthree from "./Abcthree";
+import Rew from "./Rew";
+import Mnb from "./Mnb";
+import Dsa from "./Dsa";
+import Jkl from "./Jkl";
 
 export default function Lab4() {
     function sayHello() {
@@ -30,6 +39,15 @@ export default function Lab4() {
             <ArrayStateVariable />
             <ParentStateComponent />
             <ReduxExamples />
+            {/*<Fds />
+            <Abc />
+            <Abcsecond />
+            <Def />
+            <Abcthree />
+            <Rew />
+            <Mnb />
+            <Dsa />
+             <Jkl />*/}
         </div>
     );
 }

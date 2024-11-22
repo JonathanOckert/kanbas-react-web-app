@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 export default function Assignments() {
     const { cid } = useParams();
-    const assignments = db.assignments;
+    const assignments = db.assignments;    
 
     return (
         <div id="wd-assignments">
@@ -32,7 +32,11 @@ export default function Assignments() {
                             <BsGripVertical />
                             ASSIGNMENTS
                             40% of Total
-                            <ModuleControlButtons />
+                            <ModuleControlButtons moduleId={""} deleteModule={function (moduleId: string): void {
+                        throw new Error("Function not implemented.");
+                    } } editModule={function (moduleId: string): void {
+                        throw new Error("Function not implemented.");
+                    } } />
                         </div>
                         <ul id="wd-assignments" className="list-group rounded-0">
                             {assignments
@@ -120,5 +124,9 @@ export default function Assignments() {
 </ul> */}
         </div>
     );
+}
+
+function setModules(arg0: any) {
+    throw new Error("Function not implemented.");
 }
 
