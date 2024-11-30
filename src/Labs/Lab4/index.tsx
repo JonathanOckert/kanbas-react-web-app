@@ -39,7 +39,8 @@ export default function Lab4() {
             <ArrayStateVariable />
             <ParentStateComponent />
             <ReduxExamples />
-            {/*<Fds />
+            {/* IGNORE - Built for the midterm
+            <Fds />
             <Abc />
             <Abcsecond />
             <Def />

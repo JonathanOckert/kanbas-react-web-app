@@ -5,12 +5,27 @@ const initialState = {
     modules: modules,
 };
 
+interface Lesson {
+    _id: string
+}
+
+interface Course {
+    name: string
+}
+
+interface Module {
+    _id: string,
+    lessons: Lesson[],
+    name: string,
+    course: Course,
+}
+
 const modulesSlice = createSlice({
     name: "modules",
     initialState,
     reducers: {
         addModule: (state, { payload: module }) => {
-            const newModule: any = {
+            const newModule: Module = {
                 _id: new Date().getTime().toString(),
                 lessons: [],
                 name: module.name,

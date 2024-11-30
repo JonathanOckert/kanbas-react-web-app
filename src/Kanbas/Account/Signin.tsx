@@ -21,7 +21,7 @@ export default function Signin() {
             <h1>Sign in</h1>
             <input 
                     defaultValue={credentials.username}
-                    onChange={(e) => setCredentials({ ...credentials, unsername: e.target.value})}
+                    onChange={(e) => setCredentials({ ...credentials, username: e.target.value})}
                     id="wd-username" 
                     placeholder="username" 
                     className="form-control mb-2"/>
