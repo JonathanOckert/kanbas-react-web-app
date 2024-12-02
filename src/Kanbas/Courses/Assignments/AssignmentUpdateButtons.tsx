@@ -51,16 +51,3 @@ export default function AssignmentControlButtons({
         </div>
     );
 }
-
-{
-    /*
-//onClick={() => {
-// data-bs-toggle="modal"
-                // data-bs-target="#wd-add-assignment-dialog"
-                // onClick={() => {
-                //     console.log(assignment);
-                //     setEditingAssignment(assignment);
-                //}}
-
-*/
-}
