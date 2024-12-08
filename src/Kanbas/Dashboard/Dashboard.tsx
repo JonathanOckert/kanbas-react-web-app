@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import * as db from "../Database";
 import { useSelector } from "react-redux";
-import Faculty from "./Faculty";
-import Student from "./Student";
 import FacultyHeader from "./FacultyHeader";
 import StudentHeader from "./StudentHeader";
 import CourseMap from "./CourseMap";

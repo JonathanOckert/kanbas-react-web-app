@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment, editAssignment } from "./reducer";
+import { addAssignment, deleteAssignment, updateAssignmentLocally, editAssignment } from "./reducer";
+import * as assignmentsClient from "./client";
+import * as coursesClient from "../client";
 import { useLocation, useParams } from "react-router";
 
 export default function AssignmentEditor({
@@ -20,9 +22,11 @@ export default function AssignmentEditor({
 
     const { pathname } = useLocation();
 
+    const cid = pathname.split("/")[3];
+
     const initialState = {
         title: "",
-        course: pathname.split("/")[3],
+        course: cid,
         modules: "",
         availability: "",
         due_date: "",
@@ -30,6 +34,11 @@ export default function AssignmentEditor({
     };
 
     const [formState, setFormState] = useState(assignment ? assignment : initialState);
+
+    const createAssignment = async (cid: string, formState: any) => {
+        const assignment = await coursesClient.createAssignment(cid, formState);
+        dispatch(addAssignment(assignment));
+    };
 
     return (
         <div id="wd-add-assignment-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -51,7 +60,7 @@ export default function AssignmentEditor({
                         <input className="form-control" disabled value={formState.course} />
                         <input
                             className="form-control"
-                            placeholder="Multiple Modules"
+                            placeholder="Indicate Number of Modules"
                             onChange={(e) => setFormState({ ...formState, modules: e.target.value })}
                             value={formState.modules}
                         />
@@ -79,7 +88,7 @@ export default function AssignmentEditor({
                             Cancel
                         </button>
                         <button
-                            onClick={() => dispatch(addAssignment(formState))}
+                            onClick={() => createAssignment(cid, formState)}
                             type="button"
                             className="btn btn-danger"
                             data-bs-dismiss="modal"

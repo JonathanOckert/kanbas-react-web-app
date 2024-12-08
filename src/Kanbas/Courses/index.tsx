@@ -28,7 +28,16 @@ export default function Courses({ courses }: { courses: any[] }) {
                         <Route path="Home" element={<Home />} />
                         <Route path="Modules" element={<Modules />} />
                         <Route path="Assignments" element={<Assignments />} />
-                        <Route path="Assignments/:aid/Edit" element={<AssignmentEditor />} />
+                        <Route
+                            path="Assignments/:aid/Edit"
+                            element={
+                                <AssignmentEditor
+                                // editAssignment={function (assignmentId: string, assignmentEdit: any): void {
+                                //     throw new Error("Function not implemented.");
+                                // }}
+                                />
+                            }
+                        />
                         <Route path="People" element={<PeopleTable />} />
                     </Routes>
                 </div>

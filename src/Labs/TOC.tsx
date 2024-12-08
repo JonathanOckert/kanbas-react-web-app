@@ -11,27 +11,28 @@ export default function TOC() {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link id="wd-a1" to="/Labs/Lab1"
-                    className={`nav-link ${pathname.includes("Lab1") ? "active" : ""}`}>
+                <Link id="wd-a1" to="/Labs/Lab1" className={`nav-link ${pathname.includes("Lab1") ? "active" : ""}`}>
                     Lab 1
                 </Link>
             </li>
             <li className="nav-item">
-                <Link id="wd-a2" to="/Labs/Lab2"
-                    className={`nav-link ${pathname.includes("Lab2") ? "active" : ""}`}>
+                <Link id="wd-a2" to="/Labs/Lab2" className={`nav-link ${pathname.includes("Lab2") ? "active" : ""}`}>
                     Lab 2
                 </Link>
             </li>
             <li className="nav-item">
-                <Link id="wd-a3" to="/Labs/Lab3"
-                    className={`nav-link ${pathname.includes("Lab3") ? "active" : ""}`}>
+                <Link id="wd-a3" to="/Labs/Lab3" className={`nav-link ${pathname.includes("Lab3") ? "active" : ""}`}>
                     Lab 3
                 </Link>
             </li>
             <li className="nav-item">
-                <Link id="wd-a4" to="/Labs/Lab4"
-                    className={`nav-link ${pathname.includes("Lab4") ? "active" : ""}`}>
+                <Link id="wd-a4" to="/Labs/Lab4" className={`nav-link ${pathname.includes("Lab4") ? "active" : ""}`}>
                     Lab 4
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link id="wd-a4" to="/Labs/Lab5" className={`nav-link ${pathname.includes("Lab5") ? "active" : ""}`}>
+                    Lab 5
                 </Link>
             </li>
             <li className="nav-item">
@@ -40,13 +41,15 @@ export default function TOC() {
                 </Link>
             </li>
             <li className="nav-item">
-                <a id="wd-jo-github"
-                    href="https://github.com/JonathanOckert/kanbas-react-web-app" 
+                <a
+                    id="wd-jo-github"
+                    href="https://github.com/JonathanOckert/kanbas-react-web-app"
                     target="_blank"
-                    className="nav-link">
-                        My GitHub
+                    className="nav-link"
+                >
+                    My GitHub
                 </a>
             </li>
         </ul>
-    )
+    );
 }

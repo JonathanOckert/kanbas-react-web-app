@@ -26,6 +26,7 @@ const enrollmentsSlice = createSlice({
                 user: userId,
                 course: courseId,
             };
+            //should explore adding functionality to prevent trying to enroll when already enrolled
             state.enrollments = [...state.enrollments, newEnrollment] as any;
         },
     },

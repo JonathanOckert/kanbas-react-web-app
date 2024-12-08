@@ -2,18 +2,29 @@ import { Link, Route, Routes, useLocation, useParams, useNavigate } from "react-
 import * as db from "../../Database";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { updateAssignment } from "./reducer";
+import { updateAssignmentLocally } from "./reducer";
+import * as assignmentsClient from "./client";
+import axios from "axios";
 
 export default function AssignmentEditor() {
-    const cid = useParams();
+    //{
+    //     editAssignment,
+    // }: {
+    //     editAssignment: (assignmentId: string, assignmentEdit: any) => void;
+    // }) {
     //const aid = useParams();
     const { pathname } = useLocation();
+    const cid = pathname.split("/")[3];
     const aid = pathname.split("/")[5];
     console.log(aid);
     //const assignments = db.assignments;
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
     let assignment = assignments.filter((a: any) => a._id === aid);
+    console.log("assignment post let: ");
+    console.log(assignment);
     assignment = assignment.length ? assignment[0] : undefined;
+    console.log("successful assignment grab? ... ");
+    console.log(assignment);
     //const assignment = db.assignments.filter((assignment: any) => assignment._id === aid);
     const navigate = useNavigate();
 
@@ -30,6 +41,17 @@ export default function AssignmentEditor() {
 
     const [assignmentEdit, updateAssignmentEdit] = useState(assignment ? assignment : initialState);
 
+    const updateAssignment = async (assignmentId: string, assignmentEdit: any) => {
+        //if (!assignmentId) return;
+        //const updatedAssignment = { name: assignmentName, course: cid };
+        //const updatedAssignment =
+        console.log("Assignment to Edit: ", assignmentEdit);
+        await assignmentsClient.updateAssignment(assignmentId, assignmentEdit);
+        dispatch(updateAssignmentLocally(assignmentEdit));
+        navigate(-1);
+        //return updatedAssignment;
+    };
+
     return (
         <div id="wd-assignments-editor">
             <label htmlFor="wd-name">
@@ -37,7 +59,12 @@ export default function AssignmentEditor() {
             </label>{" "}
             <br />
             <br />
-            <input id="wd-name" className="form-control" placeholder="A1" />
+            <input
+                id="wd-name"
+                className="form-control"
+                placeholder={assignment.title}
+                onChange={(e) => updateAssignmentEdit({ ...assignmentEdit, title: e.target.value })}
+            />
             <br />
             <br />
             <textarea id="wd-description" className="form-control">
@@ -189,7 +216,8 @@ export default function AssignmentEditor() {
                             Cancel
                         </button>
                         &nbsp;
-                        <button onClick={() => dispatch(updateAssignment(assignmentEdit)) && navigate(-1)}>Save</button>
+                        {/* <button onClick={async () => await updateAssignment(assignmentEdit._id, assignmentEdit) && navigate(-1)}> */}
+                        <button onClick={() => updateAssignment(assignmentEdit._id, assignmentEdit)}>Save</button>
                     </td>
                 </tr>
             </table>

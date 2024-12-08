@@ -53,7 +53,7 @@ export default function StudentButtons({
             )}
             {!showEnrollmentView && (
                 <button
-                    className="btn btn-success"
+                    className="btn btn-success float-end"
                     onClick={(event) => {
                         event.preventDefault();
                         let userId = currentUser._id;
