@@ -6,12 +6,14 @@ import * as assignmentsClient from "./client";
 import { Modal, Button } from "react-bootstrap";
 
 export default function DeleteAssignment({
-    assignmentId,
+    assignment,
+    //assignmentId,
     //removeAssignment,
     //resetAssignmentState,
     closeModal,
 }: {
-    assignmentId: string;
+    assignment: any;
+    //assignmentId: string;
     //removeAssignment: (assignmentId: string) => void;
     //resetAssignmentState: () => void;
     closeModal: () => void;
@@ -31,11 +33,32 @@ export default function DeleteAssignment({
     //     modal.show();
     // }, [assignmentId]);
 
-    const removeAssignment = async (assignmentId: string) => {
-        console.log("the assignment to delete is: ", assignmentId);
-        await assignmentsClient.deleteAssignment(assignmentId);
-        dispatch(deleteAssignment(assignmentId));
+    const { pathname } = useLocation();
+    const initialState = {
+        title: "",
+        course: pathname.split("/")[3],
+        modules: "",
+        availability: "",
+        due_date: "",
+        points: "",
     };
+
+    const [assignmentToDelete, setAssignmentToDelete] = useState(assignment ? assignment : initialState);
+
+    console.log("testing testing");
+    console.log("Trash can clicked for assignment: ", assignmentToDelete);
+    console.log("The assignment variable holds: ", assignment);
+    // const removeAssignment = async (assignmentId: string) => {
+    //     console.log("the assignment to delete is: ", assignmentId);
+    //     await assignmentsClient.deleteAssignment(assignmentId);
+    //     dispatch(deleteAssignment(assignmentId));
+    // };
+    const removeAssignment = async (assignment: any) => {
+        console.log("the assignment to delete is: ", assignment);
+        await assignmentsClient.deleteAssignment(assignment);
+        dispatch(deleteAssignment(assignment._id));
+    };
+    console.log("end testing");
 
     return (
         <div id="wd-delete-assignment-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -62,9 +85,10 @@ export default function DeleteAssignment({
                             className="btn btn-danger"
                             data-bs-dismiss="modal"
                             onClick={() => {
-                                console.log(assignmentId);
+                                //setAssignmentToDelete(assignment);
+                                console.log(assignment._id);
                                 console.log("in delete mode");
-                                removeAssignment(assignmentId);
+                                removeAssignment(assignmentToDelete._id);
                                 //resetAssignmentState();
                                 closeModal();
                             }}

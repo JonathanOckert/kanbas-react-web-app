@@ -36,7 +36,8 @@ export default function AssignmentUpdateButtons({
 
     const navigate = useNavigate();
 
-    const [assignmentToDelete, setAssignmentToDelete] = useState<null | any>(null);
+    const [assignmentToDelete, setAssignmentToDelete] = useState(assignment ? assignment : null);
+    //useState<null | any>(null);
 
     // const updateAssignment = async (assignmentId: string, assignmentName: string, cid: string) => {
     //     if (!cid) return;
@@ -49,7 +50,8 @@ export default function AssignmentUpdateButtons({
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
-        setAssignmentToDelete(assignment);
+        console.log("testing to see what assignment we're deleting: ", assignmentToDelete);
+        //setAssignmentToDelete(assignment);
         setIsModalOpen(true);
     };
 
@@ -79,7 +81,8 @@ export default function AssignmentUpdateButtons({
             <IoEllipsisVertical className="fs-4" />
             {/* {isModalOpen && assignmentToDelete && ( */}
             <DeleteAssignment
-                assignmentId={assignment._id}
+                assignment={assignmentToDelete}
+                //assignmentId={assignment._id}
                 //removeAssignment={removeAssignment}
                 //resetAssignmentState={() => setAssignmentToDelete(null)}
                 closeModal={closeModal}
