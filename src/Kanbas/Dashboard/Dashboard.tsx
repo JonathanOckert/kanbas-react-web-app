@@ -27,7 +27,7 @@ export default function Dashboard({
 
     //state var for enrollmentView and pass to studentheader and then
 
-    const [showEnrollmentView, setShowEnrollmentView] = useState(false);
+    const [showEnrollmentView, setShowEnrollmentView] = useState(true);
 
     const faculty = currentUser.role == "FACULTY";
 

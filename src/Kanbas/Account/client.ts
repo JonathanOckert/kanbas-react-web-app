@@ -32,8 +32,8 @@ export const signout = async () => {
 // current might need to be changed to some sort of ${user._id}
 // jk - in node application it checks to see if the userId === "current" and then,
 // if it does, pulls in the info for the currentUser
-export const findMyCourses = async () => {
-    const { data } = await axiosWithCredentials.get(`${USERS_API}/current/courses`);
+export const findMyCourses = async (userId: string) => {
+    const { data } = await axiosWithCredentials.get(`${USERS_API}/${userId}/courses`);
     return data;
 };
 

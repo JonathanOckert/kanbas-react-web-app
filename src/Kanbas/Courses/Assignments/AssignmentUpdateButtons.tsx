@@ -73,7 +73,7 @@ export default function AssignmentUpdateButtons({
                 id="delete-assignment-btn"
                 className="text-danger me-2 mb-1"
                 data-bs-toggle="modal"
-                data-bs-target="#wd-delete-assignment-dialog"
+                data-bs-target={`#wd-delete-assignment-dialog-${assignment._id}`}
                 onClick={openModal} //setAssignmentToDelete(assignment)}
                 //deleteModule
             />

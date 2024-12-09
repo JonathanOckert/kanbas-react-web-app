@@ -45,9 +45,9 @@ export default function DeleteAssignment({
 
     const [assignmentToDelete, setAssignmentToDelete] = useState(assignment ? assignment : initialState);
 
-    console.log("testing testing");
-    console.log("Trash can clicked for assignment: ", assignmentToDelete);
-    console.log("The assignment variable holds: ", assignment);
+    // console.log("testing testing");
+    // console.log("Trash can clicked for assignment: ", assignmentToDelete);
+    // console.log("The assignment variable holds: ", assignment);
     // const removeAssignment = async (assignmentId: string) => {
     //     console.log("the assignment to delete is: ", assignmentId);
     //     await assignmentsClient.deleteAssignment(assignmentId);
@@ -58,10 +58,15 @@ export default function DeleteAssignment({
         await assignmentsClient.deleteAssignment(assignment);
         dispatch(deleteAssignment(assignment._id));
     };
-    console.log("end testing");
+    //console.log("end testing");
 
     return (
-        <div id="wd-delete-assignment-dialog" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div
+            id={`wd-delete-assignment-dialog-${assignment._id}`}
+            className="modal fade"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+        >
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -86,9 +91,9 @@ export default function DeleteAssignment({
                             data-bs-dismiss="modal"
                             onClick={() => {
                                 //setAssignmentToDelete(assignment);
-                                console.log(assignment._id);
+                                console.log(assignmentToDelete._id);
                                 console.log("in delete mode");
-                                removeAssignment(assignmentToDelete._id);
+                                removeAssignment(assignmentToDelete);
                                 //resetAssignmentState();
                                 closeModal();
                             }}

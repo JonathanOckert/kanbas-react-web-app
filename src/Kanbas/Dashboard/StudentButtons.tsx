@@ -3,23 +3,39 @@ import { deleteCourse } from "../Courses/reducer";
 import { enrollments } from "../Database";
 import { useDispatch, useSelector } from "react-redux";
 import { unenrollFromCourse, enrollInCourse } from "./reducer";
+import * as enrollmentsClient from "../Courses/Enrollments/client";
 
 export default function StudentButtons({
     course,
     user,
     enrollments,
     showEnrollmentView,
+    enrollUser,
+    unenrollUser,
 }: {
     course: any;
     user: any;
     enrollments: any;
     showEnrollmentView: any;
+    enrollUser: (userId: string, courseId: string) => void;
+    unenrollUser: (userId: string, courseId: string) => void;
 }) {
-    const [setCourse] = useState<any>(course);
+    //const [courses, setCourses] = useState<any[]>(courses);
 
     const { currentUser } = useSelector((state: any) => state.accountReducer);
 
     const dispatch = useDispatch();
+
+    // const enrollUser = async (userId: string, courseId: string) => {
+    //     enrollmentsClient.createEnrollment(courseId, userId);
+    //     dispatch(enrollInCourse({ userId, courseId }));
+    // };
+
+    // const unenrollUser = async (enrollmentId: string, courseId: string) => {
+    //     enrollmentsClient.deleteEnrollment(courseId, enrollment.user);
+    //     dispatch(unenrollFromCourse(enrollment._id));
+    //     window.location.reload();
+    // };
 
     // let enrollment = enrollments.filter(function (e: { user: any; course: any }) {
     //     return e.user == user._id && e.course == course._id;
@@ -44,7 +60,7 @@ export default function StudentButtons({
                         if (enrollment) {
                             enrollmentId = enrollment._id;
                         }
-                        dispatch(unenrollFromCourse(enrollmentId));
+                        unenrollUser(enrollment.user, course._id);
                     }}
                     id="wd-delete-course-click"
                 >
@@ -58,7 +74,7 @@ export default function StudentButtons({
                         event.preventDefault();
                         let userId = currentUser._id;
                         let courseId = course._id;
-                        dispatch(enrollInCourse({ userId, courseId }));
+                        enrollUser(userId, courseId);
                         // console.log(enrollmentId);
                     }}
                     id="wd-delete-course-click"
