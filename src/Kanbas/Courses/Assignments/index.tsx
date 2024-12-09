@@ -57,6 +57,10 @@ export default function Assignments() {
         fetchAssignments();
     }, []);
 
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+    const faculty = currentUser.role == "FACULTY";
+
     return (
         <div id="wd-assignments">
             <AssignmentControls />
@@ -107,14 +111,16 @@ export default function Assignments() {
                                     </div>
 
                                     <div className="col col-3">
-                                        <AssignmentUpdateButtons
-                                            assignment={assignment}
-                                            assignmentId={assignment._id}
-                                            //removeAssignment={removeAssignment}
-                                            //editAssignment={(assignmentId, assignmentEdit) =>
-                                            //    editAssignment(assignmentId, assignmentEdit)
-                                            //}
-                                        />
+                                        {faculty && (
+                                            <AssignmentUpdateButtons
+                                                assignment={assignment}
+                                                assignmentId={assignment._id}
+                                                //removeAssignment={removeAssignment}
+                                                //editAssignment={(assignmentId, assignmentEdit) =>
+                                                //    editAssignment(assignmentId, assignmentEdit)
+                                                //}
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             </li>

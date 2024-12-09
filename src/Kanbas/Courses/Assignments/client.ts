@@ -13,13 +13,13 @@ export const deleteAssignment = async (assignmentToDelete: any) => {
     console.log("sending to backend: ", assignmentToDelete);
     //console.log("id sent: ", assignmentId);
     const assignmentId = assignmentToDelete._id;
-    const response = await axios.delete(`${ASSIGNMENTS_API}/${assignmentId}`, assignmentToDelete);
+    const response = await axios.delete(`${ASSIGNMENTS_API}/${assignmentId}/delete`, assignmentToDelete);
     return response.data;
 };
 
 export const updateAssignment = async (assignmentId: string, updatedAssignment: any) => {
     console.log("sending to backend: ", updatedAssignment);
     console.log("id sent: ", assignmentId);
-    const { data } = await axios.put(`${ASSIGNMENTS_API}/${assignmentId}`, updatedAssignment);
+    const { data } = await axios.put(`${ASSIGNMENTS_API}/${assignmentId}/update`, updatedAssignment);
     return data;
 };
