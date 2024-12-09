@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createSlice } from "@reduxjs/toolkit";
 import { enrollments } from "../Database";
+import { courses } from "../Database";
 
 interface Enrollment {
     _id: string;

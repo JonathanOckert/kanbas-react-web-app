@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 //import { enrollments } from "../Database";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
+//import { addNewCourse, deleteCourseReducer, editCourse } from "../Courses/reducer";
+import * as coursesReducer from "../Courses/reducer";
 import FacultyButtons from "./FacultyButtons";
 import StudentButtons from "./StudentButtons";
 import * as coursesClient from "../Courses/client";
@@ -14,10 +15,14 @@ export default function CourseMap({
     courses,
     enrollments,
     showEnrollmentView,
+    deleteCourse,
+    updateCourse,
 }: {
     courses: any[];
     enrollments: any[];
     showEnrollmentView: Boolean;
+    deleteCourse: (courseId: string) => void;
+    updateCourse: (course: any) => void;
 }) {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     //const { enrollments } ;
@@ -25,9 +30,9 @@ export default function CourseMap({
     const [allCourses, setAllCourses] = useState<any[]>([]);
     const [enrolledCourses, setEnrolledCourses] = useState<any[]>([]);
 
-    console.log(courses);
-    console.log("break");
-    console.log(enrolledCourses);
+    // console.log(courses);
+    // console.log("break");
+    // console.log(enrolledCourses);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -41,6 +46,19 @@ export default function CourseMap({
         fetchCourses();
     }, [showEnrollmentView]);
 
+    // FACULTY BUTTON OPTIONS
+    // const deleteCourse = async (courseId: string) => {
+    //     await coursesClient.deleteCourse(courseId);
+    //     dispatch(deleteCourseReducer(courseId));
+    // };
+
+    // const editCourse = async (course: any) => {
+    //     const updatedCourse = coursesClient.updateCourseServer(course);
+    //     dispatch(updateCourse(course));
+    //     return;
+    // };
+
+    // STUDENT BUTTON OPTIONS
     const enrollUser = async (userId: string, courseId: string) => {
         const newEnrollment = await enrollmentsClient.createEnrollment(courseId, userId);
         setEnrolledCourses((enrolledCourses) => [
@@ -61,6 +79,8 @@ export default function CourseMap({
     const [course, setCourse] = useState<any>(courses);
 
     const faculty = currentUser.role == "FACULTY";
+
+    const courseEditingActive = false;
 
     return (
         <div>
@@ -84,10 +104,39 @@ export default function CourseMap({
                                                             overflow-y-hidden"
                                                   style={{ maxHeight: 100 }}
                                               >
-                                                  {course.description}
+                                                  {course.editing ? (
+                                                      <input
+                                                          className="form-control w-50 d-inline-block"
+                                                          onChange={(e) =>
+                                                              dispatch(
+                                                                  coursesReducer.updateCourse({
+                                                                      ...course,
+                                                                      name: e.target.value,
+                                                                  })
+                                                              )
+                                                          }
+                                                          onKeyDown={(e) => {
+                                                              if (e.key === "Enter") {
+                                                                  updateCourse({ ...course, editing: false });
+                                                              }
+                                                          }}
+                                                          defaultValue={course.description}
+                                                      />
+                                                  ) : (
+                                                      course.description
+                                                  )}
                                               </p>
                                               <button className="btn btn-primary">Go</button>
-                                              {faculty && <FacultyButtons course={course} />}
+                                              {faculty && (
+                                                  <FacultyButtons
+                                                      course={course}
+                                                      deleteCourse={deleteCourse}
+                                                      //updateCourse={updateCourse}
+                                                      //editCourse={(course._id) => dispatch(editCourse(course._id))}
+                                                      //editCourse={(course._id) => dispatch(editCourse(course._id))}
+                                                      courseEditingActive={courseEditingActive}
+                                                  />
+                                              )}
                                               {!faculty && (
                                                   <StudentButtons
                                                       course={course}
@@ -122,7 +171,15 @@ export default function CourseMap({
                                                   {course.description}
                                               </p>
                                               <button className="btn btn-primary">Go</button>
-                                              {faculty && <FacultyButtons course={course} />}
+                                              {faculty && (
+                                                  <FacultyButtons
+                                                      course={course}
+                                                      deleteCourse={deleteCourse}
+                                                      //updateCourse={updateCourse}
+                                                      //editCourse={editCourse}
+                                                      courseEditingActive={courseEditingActive}
+                                                  />
+                                              )}
                                               {!faculty && (
                                                   <StudentButtons
                                                       course={course}

@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { Link } from "react-router-dom";
 import * as db from "../Database";
 import { useSelector } from "react-redux";
-import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
+import { addNewCourse, deleteCourseReducer, updateCourse } from "../Courses/reducer";
 
 export default function StudentHeader({
     courses,

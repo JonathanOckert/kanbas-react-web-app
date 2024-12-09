@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as db from "../Database";
 import { useSelector } from "react-redux";
-import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
+import { addNewCourse, deleteCourseReducer, updateCourse } from "../Courses/reducer";
 
-export default function FacultyHeader({ courses }: { courses: any[] }) {
+export default function FacultyHeader({
+    courses,
+    addNewCourse,
+}: {
+    courses: any[];
+    addNewCourse: (course: any) => void;
+}) {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const { enrollments } = db;
 
@@ -15,7 +21,15 @@ export default function FacultyHeader({ courses }: { courses: any[] }) {
             <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
             <h5>
                 New Course
-                <button className="btn btn-primary float-end" id="wd-add-new-course-click" onClick={addNewCourse}>
+                <button
+                    className="btn btn-primary float-end"
+                    id="wd-add-new-course-click"
+                    onClick={() => {
+                        console.log("adding course: ", course);
+                        addNewCourse(course);
+                        window.location.reload();
+                    }}
+                >
                     Add
                 </button>
                 <button className="btn btn-warning me-2 float-end" id="wd-update-course-click" onClick={updateCourse}>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as db from "../Database";
 import { useSelector } from "react-redux";
-import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
+import { addNewCourse, deleteCourseReducer, updateCourse } from "../Courses/reducer";
 
 export default function Student({ courses }: { courses: any[] }) {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
@@ -59,7 +59,7 @@ export default function Student({ courses }: { courses: any[] }) {
                                                 className="btn btn-danger float-end"
                                                 onClick={(event) => {
                                                     event.preventDefault();
-                                                    deleteCourse(course._id);
+                                                    deleteCourseReducer(course._id);
                                                 }}
                                                 id="wd-delete-course-click"
                                             >

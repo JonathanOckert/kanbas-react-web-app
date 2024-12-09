@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deleteCourse } from "../Courses/reducer";
+import { deleteCourseReducer } from "../Courses/reducer";
 import { enrollments } from "../Database";
 import { useDispatch, useSelector } from "react-redux";
 import { unenrollFromCourse, enrollInCourse } from "./reducer";

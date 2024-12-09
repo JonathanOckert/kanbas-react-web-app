@@ -1,8 +1,18 @@
 import { useState } from "react";
-import { deleteCourse, updateCourse } from "../Courses/reducer";
+import { deleteCourseReducer, updateCourse, editCourse } from "../Courses/reducer";
 import { useDispatch } from "react-redux";
 
-export default function FacultyButtons({ course }: { course: any }) {
+export default function FacultyButtons({
+    course,
+    deleteCourse,
+    //editCourse,
+    courseEditingActive,
+}: {
+    course: any;
+    deleteCourse: (courseId: string) => void;
+    //editCourse: (courseId: string) => void;
+    courseEditingActive: boolean;
+}) {
     const [setCourse] = useState<any>(course);
 
     const dispatch = useDispatch();
@@ -14,7 +24,9 @@ export default function FacultyButtons({ course }: { course: any }) {
                 onClick={(event) => {
                     event.preventDefault();
                     console.log(course);
-                    dispatch(deleteCourse(course._id));
+                    //dispatch(deleteCourseReducer(course._id));
+                    deleteCourse(course._id);
+                    window.location.reload();
                 }}
                 id="wd-delete-course-click"
             >
@@ -26,7 +38,16 @@ export default function FacultyButtons({ course }: { course: any }) {
                     event.preventDefault();
                     console.log(course);
                     //setCourse(course);
-                    dispatch(updateCourse(course));
+                    //dispatch(updateCourse(course));
+                    //dispatch(editCourse(course._id)); //(course);
+                    courseEditingActive = !courseEditingActive;
+                    if (courseEditingActive) {
+                        dispatch(editCourse(course._id));
+                    }
+                    // if (courseEditingActive) {
+                    //     state.courses = state.modules.map((c: any) => (c._id === course._id ? { ...c, editing: true } : c)) as any;
+                    //     {...course, editing: true};
+                    // }
                 }}
                 id="wd-edit-course-click"
             >
@@ -34,4 +55,23 @@ export default function FacultyButtons({ course }: { course: any }) {
             </button>
         </>
     );
+}
+
+{
+    /* <li key={module._id}>
+                            {module.editing ? (
+                                <input
+                                    className="form-control w-50 d-inline-block"
+                                    onChange={(e) => dispatch(updateModule({ ...module, name: e.target.value }))}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            saveModule({ ...module, editing: false });
+                                            // dispatch(updateModule({ ...module, editing: false }));
+                                        }
+                                    }}
+                                    defaultValue={module.name}
+                                />
+                            ) : (
+                                module.name
+                            )} */
 }
