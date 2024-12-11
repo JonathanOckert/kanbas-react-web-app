@@ -1,10 +1,24 @@
-body { margin: 0; padding: 0; }
-body * { font-family: Arial, Helvetica, sans-serif; }
+body {
+    margin: 0;
+    padding: 0;
+}
+body * {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 @media (min-width: 768px) {
     #wd-kanbas .wd-main-content-offset {
         padding-left: 140px !important;
     }
+}
+
+#wd-quiz-controls {
+    position: relative;
+}
+
+.dropdown-menu {
+    z-index: 1050;
+    position: absolute;
 }
 
 .list-group.wd > .list-group-item.active {
@@ -18,29 +32,29 @@ body * { font-family: Arial, Helvetica, sans-serif; }
     --bs-btn-bg: #c7cdd1 !important;
     --bs-btn-border-color: #c7cdd1 !important;
     --bs-btn-hover-color: #fff !important;
-  }
-  .bg-secondary {
+}
+.bg-secondary {
     --bs-secondary-rgb: 199, 205, 209;
-  }
-  .list-group-item {
+}
+.list-group-item {
     --bs-list-group-border-color: gray;
-  }
-  .wd-lesson {
+}
+.wd-lesson {
     border-left: 3px solid green !important;
-  }
+}
 
-  .wd-assignment {
+.wd-assignment {
     border-left: 3px solid green !important;
-  }
-  
-  .form-outline i {
+}
+
+.form-outline i {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
-  }
+}
 
-  .wd-search-width {
+.wd-search-width {
     text-align: left;
     width: 50%;
-  }
+}

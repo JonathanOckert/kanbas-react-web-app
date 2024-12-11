@@ -6,16 +6,19 @@ import PeopleTable from "./People/Table";
 import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import AssignmentEditor from "./Assignments/Editor";
 import { FaAlignJustify } from "react-icons/fa6";
+import Quizzes from "./Quizzes";
+import QuizEditor from "./Quizzes/QuizEditor";
 
 export default function Courses({ courses }: { courses: any[] }) {
     const { cid } = useParams();
     const course = courses.find((course) => course._id === cid);
+    console.log(course);
     const { pathname } = useLocation();
     return (
         <div id="wd-courses">
             <h2 className="text-danger">
                 <FaAlignJustify className="me-4 fs-4 mb-1" />
-                {course && course.name} &gt; {pathname.split("/")[4]}
+                {course && course._id}: {course && course.name} &gt; {pathname.split("/")[4]}
             </h2>
             <hr />
             <div className="d-flex">
@@ -39,6 +42,8 @@ export default function Courses({ courses }: { courses: any[] }) {
                             }
                         />
                         <Route path="People" element={<PeopleTable />} />
+                        <Route path="Quizzes" element={<Quizzes />} />
+                        <Route path="Quizzes/:quizId/Edit" element={<QuizEditor />} />
                     </Routes>
                 </div>
             </div>

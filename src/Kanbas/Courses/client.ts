@@ -39,3 +39,17 @@ export const createAssignment = async (courseId: string, assignment: any) => {
     const response = await axios.post(`${COURSES_API}/${courseId}/assignments`, assignment);
     return response.data;
 };
+
+// *** QUIZZES ***
+// get all quizzes for course
+export const findQuizzesForCourse = async (courseId: string) => {
+    console.log("sending to backend course: ", courseId);
+    const response = await axios.get(`${COURSES_API}/${courseId}/quizzes`);
+    return response.data;
+};
+
+export const createQuiz = async (courseId: string, quiz: any) => {
+    console.log("sending to backend: ", quiz);
+    const response = await axios.post(`${COURSES_API}/${courseId}/quizzes`, quiz);
+    return response.data;
+};
