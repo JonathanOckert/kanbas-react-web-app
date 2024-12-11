@@ -12,28 +12,26 @@ export default function QuizControls() {
     const { pathname } = useLocation();
 
     const cid = pathname.split("/")[3];
-    console.log("the cid is: ", cid);
-    console.log("the path is: ", pathname);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const initialState = {
-        _id: new Date(),
+        _id: new Date().getTime().toString(),
         name: "New Quiz",
         course: cid,
         quizType: "Graded Quiz", //may need to revisit
         points: 100, //sum of all questions... formula?
-        assignmentGroup: "Quizzes", //list?
-        shuffleAnswers: false, //yes/no
+        assignmentGroup: "QUIZZES", //list?
+        shuffleAnswers: "Yes", //yes/no
         timeLimit: 20, //in minutes
-        multipleAttempts: false, //yes/no
+        multipleAttempts: "No", //yes/no
         numAttempts: 1, //if multAtt = yes, then can be other than 1
-        showCorrectAnswer: true, //yes/no
+        showCorrectAnswer: "Yes", //yes/no
         accessCode: "", //optional password protection
-        oneQuestionAtATime: true, //yes/no for # of Q to display at a time
-        webcamRequired: false, //yes/no
-        lockQuestionsAfterAnswering: false, //yes/no
+        oneQuestionAtATime: "Yes", //yes/no for # of Q to display at a time
+        webcamRequired: "No", //yes/no
+        lockQuestionsAfterAnswering: "Yes", //yes/no
         dueDate: new Date(),
         availableDate: new Date(),
         untilDate: new Date(),
@@ -46,7 +44,9 @@ export default function QuizControls() {
         try {
             const quiz = await coursesClient.createQuiz(cid, initialQuiz);
             dispatch(addQuiz(quiz));
-            navigate(`/${quiz._id}/Edit`);
+            console.log("sending to backend quiz object: ", quiz);
+            console.log("with id: ", quiz._id);
+            navigate(`${pathname}/${quiz._id}/Edit`);
         } catch (error) {
             console.error("Failed to create quiz", error);
         }
@@ -58,11 +58,11 @@ export default function QuizControls() {
                 <BiDotsVertical />
             </button>
             {/* <button id="wd-add-quiz-btn" className="btn btn-lg btn-danger me-1 float-end" onClick={() => someLogic}> */}
-            {/* <button className="btn btn-lg btn-danger float-end" onClick={() => createQuiz(cid, initializedQuiz)}>
+            <button className="btn btn-lg btn-danger float-end" onClick={() => createQuiz(cid, initializedQuiz)}>
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Quiz
             </button>
-            </button> */}
+            {/* </button> */}
             <button className="btn btn-light btn-lg wd-search-width">
                 <FaMagnifyingGlass />
                 &nbsp;&nbsp;&nbsp;<span>Search...</span>

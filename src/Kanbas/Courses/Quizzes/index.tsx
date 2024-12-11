@@ -56,10 +56,6 @@ export default function Quizzes() {
         const unfriendlyUntil = new Date(quiz.untilDate);
         unfriendlyUntil.setHours(0, 0, 0, 0);
 
-        console.log("time value: ", unfriendlyDue);
-        console.log("time value: ", unfriendlyAvailable);
-        console.log("time value: ", unfriendlyUntil);
-
         const friendlyDue = new Intl.DateTimeFormat("en-US", {
             year: "numeric",
             month: "short",
@@ -110,7 +106,7 @@ export default function Quizzes() {
                             <div className="col col-7">
                                 <a
                                     className="wd-quiz-link text-black text-decoration-none"
-                                    href={`#/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`}
+                                    href={`#/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/Edit`}
                                 >
                                     <b>{quiz.name}</b>
                                 </a>

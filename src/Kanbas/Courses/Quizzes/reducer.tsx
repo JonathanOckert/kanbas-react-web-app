@@ -32,7 +32,7 @@ const quizzesSlice = createSlice({
         addQuiz: (state, { payload: quiz }) => {
             console.log(quiz);
             const newQuiz: Quiz = {
-                _id: new Date().getTime().toString(),
+                _id: quiz._id,
                 name: quiz.name,
                 course: quiz.course,
                 quizType: quiz.quizType,
@@ -59,7 +59,7 @@ const quizzesSlice = createSlice({
             state.quizzes = state.quizzes.filter((q: any) => q._id !== quizId);
         },
 
-        updateQuiz: (state, { payload: quiz }) => {
+        updateQuizLocally: (state, { payload: quiz }) => {
             state.quizzes = state.quizzes.map((q: any) => (q._id === quiz._id ? quiz : q)) as any;
         },
 
@@ -73,6 +73,6 @@ const quizzesSlice = createSlice({
     },
 });
 
-export const { addQuiz, deleteQuiz, updateQuiz, editQuiz, setQuizzes } = quizzesSlice.actions;
+export const { addQuiz, deleteQuiz, updateQuizLocally, editQuiz, setQuizzes } = quizzesSlice.actions;
 
 export default quizzesSlice.reducer;

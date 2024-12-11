@@ -16,7 +16,7 @@ import { setModules } from "../Modules/reducer";
 
 export default function Assignments() {
     const { cid } = useParams();
-    console.log(cid);
+
     const navigate = useNavigate();
     //const modules = db.modules;
     const [assignmentName, setAssignmentName] = useState("");
